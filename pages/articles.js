@@ -1,11 +1,8 @@
 import NavBar from "../comps/navbar";
 import Head from 'next/head'
 import data from './data.json'
-import path from 'path'
 import Footer from "../comps/footer";
-
 import Router from 'next/router';
-import { Route } from "@mui/icons-material";
 
 const Page = () => {
   return (
