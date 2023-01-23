@@ -11,13 +11,25 @@ import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Link from 'next/link';
 import useSWR from 'swr';
+import { request } from '../helpers/request';
+import { URLS } from '../constants/urls';
 
 export default function Home() {
-  const fetcher = (url) => fetch(url).then((res) => res.json());
-  const { data, error } = useSWR('/api/articleData', fetcher);
-  if (error) return <div className="w-3/4 px-16 py-5 ">
-    <h1 className='text-4xl h-full w-full justify-center align-middle content-center font-bold tracking-tight text-zinc-100'>Failed to load</h1></div>;
-  if (!data) return <div className=" w-3/4 px-16 py-5 "><h1 className='text-4xl h-full w-full justify-center align-middle content-center font-bold tracking-tight text-zinc-100'>Loading...</h1></div>;
+  const { data, error } = useSWR('/api/articles', request);
+  if (error) {
+    return (
+      <div className="w-3/4 px-16 py-5 ">
+        <h1 className="text-4xl h-full w-full justify-center align-middle content-center font-bold tracking-tight text-zinc-100">Failed to load</h1>
+      </div>
+    )
+  }
+  if (!data) {
+    return (
+      <div className=" w-3/4 px-16 py-5 ">
+        <h1 className="text-4xl h-full w-full justify-center align-middle content-center font-bold tracking-tight text-zinc-100">Loading...</h1>
+      </div>
+    )
+  }
   return (
     <>
       <Head>
@@ -28,119 +40,122 @@ export default function Home() {
       </Head>
       <main>
         <Navbar />
-        <div className='w-3/4 px-16 py-5'>
-          <h1 className='text-4xl font-bold tracking-tight text-zinc-100 '>Software designer, founder, and amateur astronaut.</h1>
-          <p className='mt-6 text-base text-zinc-400'>I’m Spencer, a software designer and entrepreneur based in New York City. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular people to explore space on their own terms.</p>
+        <div className="w-3/4 px-16 py-5">
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-100 ">Software designer, founder, and amateur astronaut.</h1>
+          <p className="mt-6 text-base text-zinc-400">I’m Spencer, a software designer and entrepreneur based in New York City. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular people to explore space on their own terms.</p>
         </div>
-        <div className='px-16 pb-16'>
-          <Link href='https://www.twitter.com/'><TwitterIcon className='mr-4 text-zinc-400' /></Link>
-          <Link href='https://www.instagram.com/'><InstagramIcon className='mr-4 text-zinc-400' /></Link>
-          <Link href='https://www.github.com/'><GitHubIcon className='mr-4 text-zinc-400' /></Link>
-          <Link href='https://www.linkedin.com'><LinkedInIcon className='mr-4 text-zinc-400' /></Link>
+        <div className="px-16 pb-16">
+          <Link href="https://www.twitter.com/"><TwitterIcon className="mr-4 text-zinc-400" /></Link>
+          <Link href="https://www.instagram.com/"><InstagramIcon className="mr-4 text-zinc-400" /></Link>
+          <Link href="https://www.github.com/"><GitHubIcon className="mr-4 text-zinc-400" /></Link>
+          <Link href="https://www.linkedin.com"><LinkedInIcon className="mr-4 text-zinc-400" /></Link>
         </div>
-        <div className='-my-4 abso flex justify-center gap-5 py-4 pb-16'>
-          <Image className='relative object-cover aspect-[9/10] w-72 flex-none overflow-hidden rounded-xl rotate-2'
-            src='/image-1.webp'
-            alt=''
-            height='384'
-            width='576'
+        <div className="-my-4 abso flex justify-center gap-5 py-4 pb-16">
+          <Image className="relative object-cover aspect-[9/10] w-72 flex-none overflow-hidden rounded-xl rotate-2"
+            src="/image-1.webp"
+            alt=""
+            height="384"
+            width="576"
           />
-          <Image className='relative object-cover aspect-[9/10] w-72 flex-none overflow-hidden rounded-xl -rotate-2'
-            src='/image-2.webp'
-            alt=''
-            height='256'
-            width='384'
+          <Image className="relative object-cover aspect-[9/10] w-72 flex-none overflow-hidden rounded-xl -rotate-2"
+            src="/image-2.webp"
+            alt=""
+            height="256"
+            width="384"
           />
-          <Image className='relative object-cover aspect-[9/10] w-72 flex-none overflow-hidden rounded-xl rotate-2'
-            src='/image-3.webp'
-            alt=''
-            height='256'
-            width='384'
+          <Image className="relative object-cover aspect-[9/10] w-72 flex-none overflow-hidden rounded-xl rotate-2"
+            src="/image-3.webp"
+            alt=""
+            height="256"
+            width="384"
           />
-          <Image className='relative object-cover aspect-[9/10] w-72 flex-none overflow-hidden rounded-xl -rotate-2'
-            src='/image-4.webp'
-            alt=''
-            height='480'
-            width='384'
+          <Image className="relative object-cover aspect-[9/10] w-72 flex-none overflow-hidden rounded-xl -rotate-2"
+            src="/image-4.webp"
+            alt=""
+            height="480"
+            width="384"
           />
-          <Image className='relative object-cover aspect-[9/10] w-72 flex-none overflow-hidden rounded-xl rotate-2'
-            src='/image-5.webp'
-            alt=''
-            height='216'
-            width='384'
+          <Image className="relative object-cover aspect-[9/10] w-72 flex-none overflow-hidden rounded-xl rotate-2"
+            src="/image-5.webp"
+            alt=""
+            height="216"
+            width="384"
           />
         </div>
-        <div className='grid grid-cols-2'>
-          <div className='pl-16 gap-5'>
-            <Link href=''>{data.articles.map(article => (
-              <div key={article.id} className='rounded-xl transition mb-5 hover:bg-zinc-800'>
-                <time className='pt-5 flex'><span className='border-l-2 ml-5 border-zinc-500 flex items-center text-sm text-zinc-500 pl-3.5'>
-                  {article.date}</span></time>
-                <h2 className='text-base font-semibold tracking-tight m-5 text-zinc-100'>{article.title}</h2>
-                <p className=' mt-2  text-sm text-zinc-400 m-5'>{article.content}</p>
-                <h2 className='pb-5 inherit text-sm font-medium ml-5 text-teal-500'>Read Article {'>'} </h2>
-              </div>
+        <div className="grid grid-cols-2">
+          <div className="pl-16 gap-5">
+            {data.articles.map(article => (
+              <Link key={article.id} href={`${URLS.ARTICLES}/${article.id}`}>
+                <div className="rounded-xl transition mb-5 hover:bg-zinc-800">
+                  <time className="pt-5 flex"><span className="border-l-2 ml-5 border-zinc-500 flex items-center text-sm text-zinc-500 pl-3.5">
+                    {article.date}</span></time>
+                  <h2 className="text-base font-semibold tracking-tight m-5 text-zinc-100">{article.title}</h2>
+                  <p className=" mt-2  text-sm text-zinc-400 m-5">{article.content}</p>
+                  <h2 className="pb-5 inherit text-sm font-medium ml-5 text-teal-500">Read Article {">"} </h2>
+                </div>
+              </Link>
             ))}
-            </Link></div>
+            
+          </div>
 
-          <div className='px-16 py-10'>
-            <div className='px-4 border rounded-xl border-zinc-700'>
-              <h2 className='text-base font-semibold tracking-tight m-5 text-zinc-100'> <MailOutlineIcon className='text-zinc-500' /> <span className='ml-4'>Stay up to date</span></h2>
-              <p className='mt-2  text-sm text-zinc-400 m-5'>Get notified when I publish something new, and unsubscribe at any time.</p>
-              <input required className=' mx-4 mb-6 rounded-md border border-zinc-900/10  px-4 pr-16 py-1 shadow-md shadow-zinc-800/5  focus:outline-none border-zinc-700 bg-zinc-800 text-zinc-200 placeholder:text-zinc-500 focus:border-teal-400 focus:ring-teal-400/10' type='email' placeholder='Email Address'></input>
-              <button className='px-3 py-1 rounded-md text-zinc-100 bg-zinc-700 hover:bg-zinc-600 active:bg-zinc-700 active:text-zinc-100/70'>Join</button>
+          <div className="px-16 py-10">
+            <div className="px-4 border rounded-xl border-zinc-700">
+              <h2 className="text-base font-semibold tracking-tight m-5 text-zinc-100"> <MailOutlineIcon className="text-zinc-500" /> <span className="ml-4">Stay up to date</span></h2>
+              <p className="mt-2  text-sm text-zinc-400 m-5">Get notified when I publish something new, and unsubscribe at any time.</p>
+              <input required className=" mx-4 mb-6 rounded-md border border-zinc-900/10  px-4 pr-16 py-1 shadow-md shadow-zinc-800/5  focus:outline-none border-zinc-700 bg-zinc-800 text-zinc-200 placeholder:text-zinc-500 focus:border-teal-400 focus:ring-teal-400/10" type="email" placeholder="Email Address"></input>
+              <button className="px-3 py-1 rounded-md text-zinc-100 bg-zinc-700 hover:bg-zinc-600 active:bg-zinc-700 active:text-zinc-100/70">Join</button>
             </div>
-            <div className='px-4 mt-10 border rounded-xl border-zinc-700'>
-              <h2 className='text-base font-semibold tracking-tight m-5 text-zinc-100'> <BusinessCenterIcon className='text-zinc-500' /> <span className='ml-5'>Work</span></h2>
-              <div className='flex-none'>
-                <h2 className='ml-5 flex text-sm text-left font-medium text-zinc-100'>
-                  <Image src='/planetaria.svg'
-                    width='30'
-                    height='30'
-                    alt='planetaria logo'
-                    className='mt-1 rounded-full shadow-md shadow-zinc-800/5 ring-0 ring-zinc-900/5 border border-zinc-700/50 bg-zinc-800' /><span className='ml-5'>Planetaria</span></h2>
-                <div className='flex justify-between ml-[4.25rem] pb-5'>
-                  <p className='text-xs text-zinc-400'>CEO</p>
-                  <p className='text-xs text-zinc-400'> 2019-present</p>
+            <div className="px-4 mt-10 border rounded-xl border-zinc-700">
+              <h2 className="text-base font-semibold tracking-tight m-5 text-zinc-100"> <BusinessCenterIcon className="text-zinc-500" /> <span className="ml-5">Work</span></h2>
+              <div className="flex-none">
+                <h2 className="ml-5 flex text-sm text-left font-medium text-zinc-100">
+                  <Image src="/planetaria.svg"
+                    width="30"
+                    height="30"
+                    alt="planetaria logo"
+                    className="mt-1 rounded-full shadow-md shadow-zinc-800/5 ring-0 ring-zinc-900/5 border border-zinc-700/50 bg-zinc-800" /><span className="ml-5">Planetaria</span></h2>
+                <div className="flex justify-between ml-[4.25rem] pb-5">
+                  <p className="text-xs text-zinc-400">CEO</p>
+                  <p className="text-xs text-zinc-400"> 2019-present</p>
                 </div>
               </div>
-              <div className='flex-none'>
-                <h2 className='ml-5 flex text-sm text-left font-medium text-zinc-100'>
-                  <Image src='/airbnb.svg'
-                    width='30'
-                    height='30'
-                    alt='airbnb logo'
-                    className='mt-1 rounded-full shadow-md shadow-zinc-800/5 ring-0 ring-zinc-900/5 border border-zinc-700/50 bg-zinc-800' /><span className='ml-5'>Airbnb</span></h2>
-                <div className='flex justify-between ml-[4.25rem] pb-5'>
-                  <p className='text-xs text-zinc-400'>Product Designer</p>
-                  <p className='text-xs text-zinc-400 '> 2014-2019</p>
+              <div className="flex-none">
+                <h2 className="ml-5 flex text-sm text-left font-medium text-zinc-100">
+                  <Image src="/airbnb.svg"
+                    width="30"
+                    height="30"
+                    alt="airbnb logo"
+                    className="mt-1 rounded-full shadow-md shadow-zinc-800/5 ring-0 ring-zinc-900/5 border border-zinc-700/50 bg-zinc-800" /><span className="ml-5">Airbnb</span></h2>
+                <div className="flex justify-between ml-[4.25rem] pb-5">
+                  <p className="text-xs text-zinc-400">Product Designer</p>
+                  <p className="text-xs text-zinc-400 "> 2014-2019</p>
                 </div>
               </div>
 
-              <div className='flex-none'>
-                <h2 className='ml-5 flex text-sm text-left font-medium text-zinc-100'>
-                  <Image src='/facebook.svg'
-                    width='30'
-                    height='30'
-                    alt='facebook logo'
-                    className='mt-1 rounded-full shadow-md shadow-zinc-800/5 ring-0 ring-zinc-900/5 border border-zinc-700/50 bg-zinc-800' /><span className='ml-5'>Facebook</span></h2>
-                <div className='flex justify-between ml-[4.25rem] pb-5'>
-                  <p className='text-xs text-zinc-400'>iOS SoftWare Engineer</p>
-                  <p className='text-xs text-zinc-400'> 2011-2014</p>
+              <div className="flex-none">
+                <h2 className="ml-5 flex text-sm text-left font-medium text-zinc-100">
+                  <Image src="/facebook.svg"
+                    width="30"
+                    height="30"
+                    alt="facebook logo"
+                    className="mt-1 rounded-full shadow-md shadow-zinc-800/5 ring-0 ring-zinc-900/5 border border-zinc-700/50 bg-zinc-800" /><span className="ml-5">Facebook</span></h2>
+                <div className="flex justify-between ml-[4.25rem] pb-5">
+                  <p className="text-xs text-zinc-400">iOS SoftWare Engineer</p>
+                  <p className="text-xs text-zinc-400"> 2011-2014</p>
                 </div>
               </div>
-              <div className='flex-none'>
-                <h2 className='ml-5 flex text-sm text-left font-medium text-zinc-100'>
-                  <Image src='/starbucks.svg'
-                    width='30'
-                    height='30'
-                    alt='starbucks logo'
-                    className='mt-1 rounded-full shadow-md shadow-zinc-800/5 ring-0 ring-zinc-900/5 border border-zinc-700/50 bg-zinc-800' /><span className='ml-5'>Starbucks</span></h2>
-                <div className='flex justify-between ml-[4.25rem] pb-5'>
-                  <p className='text-xs text-zinc-400'>Shift Supervisor</p>
-                  <p className='text-xs text-zinc-400'> 2008-2011</p>
+              <div className="flex-none">
+                <h2 className="ml-5 flex text-sm text-left font-medium text-zinc-100">
+                  <Image src="/starbucks.svg"
+                    width="30"
+                    height="30"
+                    alt="starbucks logo"
+                    className="mt-1 rounded-full shadow-md shadow-zinc-800/5 ring-0 ring-zinc-900/5 border border-zinc-700/50 bg-zinc-800" /><span className="ml-5">Starbucks</span></h2>
+                <div className="flex justify-between ml-[4.25rem] pb-5">
+                  <p className="text-xs text-zinc-400">Shift Supervisor</p>
+                  <p className="text-xs text-zinc-400"> 2008-2011</p>
                 </div>
-                <button className='px-3 mb-5 py-1 w-full rounded-md text-zinc-200 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 active:text-zinc-100/70'> Download CV <ArrowDownwardIcon style={{ fontSize: 'medium' }} /> </button>
+                <button className="px-3 mb-5 py-1 w-full rounded-md text-zinc-200 bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600 active:text-zinc-100/70"> Download CV <ArrowDownwardIcon style={{ fontSize: 'medium' }} /> </button>
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { URLS } from '../constants/urls';
 
 const NavBar = () => {
   const router = useRouter();
@@ -17,11 +18,11 @@ const NavBar = () => {
         /></Link>
         <nav className='flex justify-center'>
           <ul className='flex rounded-full  text-sm font-medium bg-zinc-800/90 text-zinc-200 ring-white/10 ring-1'>
-            <li className={currentRoute === '/about' ? 'relative block px-3 py-2  text-teal-400' : 'relative block px-3 py-2 hover:text-teal-400'}>
-              <Link href='/about'>About</Link>
+            <li className={currentRoute === URLS.ABOUT ? 'relative block px-3 py-2  text-teal-400' : 'relative block px-3 py-2 hover:text-teal-400'}>
+              <Link href={URLS.ABOUT}>About</Link>
             </li>
-            <li className={currentRoute === '/articles' ? 'relative block px-3 py-2  text-teal-400' : 'relative block px-3 py-2 hover:text-teal-400'}>
-              <Link href='/articles'>Articles</Link>
+            <li className={currentRoute === URLS.ARTICLES ? 'relative block px-3 py-2  text-teal-400' : 'relative block px-3 py-2 hover:text-teal-400'}>
+              <Link href={URLS.ARTICLES}>Articles</Link>
             </li>
           </ul>
         </nav>
