@@ -35,13 +35,38 @@ const Page = () => {
                     width='640'
                 />
                 <div className="border-b-2 border-zinc-400 pb-16">
-                    <Link href='https://www.twitter.com/'><p className="flex mt-4 text-sm font-medium text-zinc-200 hover:text-teal-500"> <TwitterIcon />   <span className='ml-4'>Follow on Twitter</span></p></Link>
-                    <Link href='https://www.instagram.com/'><p className="flex  mt-4  text-sm font-medium text-zinc-200 hover:text-teal-500"> <InstagramIcon />   <span className='ml-4'>Follow on Instagram</span></p></Link>
-                    <Link href='https://www.github.com/'><p className="flex  mt-4 text-sm font-medium text-zinc-200 hover:text-teal-500"><GitHubIcon />   <span className='ml-4'>Follow on GitHub</span></p></Link>
-                    <Link href='https://www.linkedin.com/'><p className="flex  mt-4 text-sm font-medium text-zinc-200 hover:text-teal-500"> <LinkedInIcon />   <span className='ml-4'>Follow on LinkedIn</span></p></Link>
+                    <Link href='https://www.twitter.com/'>
+                        <p className="flex mt-4 text-sm font-medium text-zinc-200 hover:text-teal-500">
+                            <TwitterIcon />
+                            <span className='ml-4'>Follow on Twitter</span>
+                        </p>
+                    </Link>
+                    <Link href='https://www.instagram.com/'>
+                        <p className="flex  mt-4  text-sm font-medium text-zinc-200 hover:text-teal-500">
+                            <InstagramIcon />
+                            <span className='ml-4'>Follow on Instagram</span>
+                        </p>
+                    </Link>
+                    <Link href='https://www.github.com/'>
+                        <p className="flex  mt-4 text-sm font-medium text-zinc-200 hover:text-teal-500">
+                            <GitHubIcon />
+                            <span className='ml-4'>Follow on GitHub</span>
+                        </p>
+                    </Link>
+                    <Link href='https://www.linkedin.com/'>
+                        <p className="flex  mt-4 text-sm font-medium text-zinc-200 hover:text-teal-500">
+                            <LinkedInIcon />
+                            <span className='ml-4'>Follow on LinkedIn</span>
+                        </p>
+                    </Link>
                 </div>
                 <div>
-                    <Link href='mailto:spencer@planetaria.tech'><p className="flex  mt-4 text-sm font-medium text-zinc-200 hover:text-teal-500"> <EmailIcon /> <span className='ml-4'>spencer@planetaria.tech</span></p></Link>
+                    <Link href='mailto:spencer@planetaria.tech'>
+                        <p className="flex  mt-4 text-sm font-medium text-zinc-200 hover:text-teal-500">
+                            <EmailIcon />
+                            <span className='ml-4'>spencer@planetaria.tech</span>
+                        </p>
+                    </Link>
                 </div>
             </div>
         </div>

@@ -1,0 +1,1 @@
+export const request = (url) => fetch(url).then((res) => res.json());
