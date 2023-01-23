@@ -10,11 +10,14 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Link from 'next/link';
-import data from './data.json';
-
-
+import useSWR from 'swr';
 
 export default function Home() {
+  const fetcher = (url) => fetch(url).then((res) => res.json());
+  const { data, error } = useSWR('/api/articleData', fetcher);
+  if (error) return <div className="w-3/4 px-16 py-5 ">
+    <h1 className='text-4xl h-full w-full justify-center align-middle content-center font-bold tracking-tight text-zinc-100'>Failed to load</h1></div>;
+  if (!data) return <div className=" w-3/4 px-16 py-5 "><h1 className='text-4xl h-full w-full justify-center align-middle content-center font-bold tracking-tight text-zinc-100'>Loading...</h1></div>;
   return (
     <>
       <Head>
