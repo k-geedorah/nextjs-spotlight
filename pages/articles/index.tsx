@@ -5,6 +5,7 @@ import Footer from "../../comps/footer";
 import Router from 'next/router';
 import { URLS } from '../../constants/urls';
 import { request } from '../../helpers/request';
+import { Key } from 'react';
 
 export default function Page() {
   const { data, error } = useSWR('/api/articles', request);
@@ -34,7 +35,7 @@ export default function Page() {
       <div className="px-16 w-11/12">
         <h1 className="text-4xl my-10 font-bold tracking-tight text-zinc-100">Writing on software design, company building, and the aerospace industry.</h1>
         <p className="text-base text-zinc-400 mb-10">All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order.</p>
-        {data.articles.map(article => (
+        {data.articles.map((article: { id: Key; date: string ; title: string ; content: string ; }) => (
           <div key={article.id}>
             <div className="grid grid-cols-3">
               <div className="col-span-1 border-l-[1px] p-4 border-zinc-600">

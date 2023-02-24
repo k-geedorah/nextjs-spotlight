@@ -2,8 +2,7 @@ import useSWR from 'swr';
 import NavBar from "../../comps/navbar";
 import Head from 'next/head'
 import Footer from "../../comps/footer";
-import Router, { useRouter } from 'next/router';
-import { URLS } from '../../constants/urls';
+import { useRouter } from 'next/router';
 import { request } from '../../helpers/request';
 
 export default function Article() {

@@ -8,8 +8,8 @@ export const getArticlesFromJson = async () => {
     return data;
 }
 
-export const getArticleById = async (id) => {
+export const getArticleById = async (id: any) => {
     const articles = await getArticlesFromJson();
-    const data = articles.find(article => article.id === id);
+    const data = articles.find((article: { id: any; }) => article.id === id);
     return data;
 }
