@@ -13,6 +13,7 @@ import Link from 'next/link';
 import useSWR from 'swr';
 import { request } from '../helpers/request';
 import { URLS } from '../constants/urls';
+import { Key } from 'react';
 
 export default function Home() {
   const { data, error } = useSWR('/api/articles', request);
@@ -84,7 +85,7 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-2">
           <div className="pl-16 gap-5">
-            {data.articles.map(article => (
+            {data.articles.map((article: { id: Key; date: string; title: string ; content: string  }) => (
               <Link key={article.id} href={`${URLS.ARTICLES}/${article.id}`}>
                 <div className="rounded-xl transition mb-5 hover:bg-zinc-800">
                   <time className="pt-5 flex"><span className="border-l-2 ml-5 border-zinc-500 flex items-center text-sm text-zinc-500 pl-3.5">
